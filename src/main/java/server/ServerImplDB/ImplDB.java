@@ -1,6 +1,9 @@
 package server.ServerImplDB;
 
+import server.models.Product;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ImplDB {
 
@@ -29,10 +32,28 @@ public class ImplDB {
         return sql.executeQuery();
     }
 
-    //public ResultSet getProduct(String product) throws Exception {
+    public ArrayList<Product> getProducts() {
 
-        //preparedStatement sql = getConnection().prepareStatement("SELECT * FROM product ");
-        //sql.setString(1, getProduct(Salat));
-        //return sql.executeQuery();
+        ArrayList<Product> products = new ArrayList<>();
+
+        try {
+            ResultSet results = getRecords("Product");
+
+            while(results.next()){
+                Product product = new Product(
+                        results.getInt("type"),
+                        results.getInt("id"),
+                        results.getString("product name"),
+                        results.getString("product price")
+                );
+
+                products.add(product);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return products;
     }
-//}
+}

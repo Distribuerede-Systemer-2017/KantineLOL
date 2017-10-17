@@ -1,9 +1,8 @@
-package server.database;
+package server;
 
+        import server.models.User;
 
-import server.models.User;
-
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
 public class UserTable {
 
@@ -15,15 +14,15 @@ public class UserTable {
 
         User user1 = new User();
         user1.setId(1);
-        user1.setAge(26);
-        user1.setName("Jesper Bruun");
+        user1.setPassword(1234);
+        user1.setUsername("Jesper Bruun");
 
         this.users.add(user1);
 
         User user2 = new User();
         user2.setId(2);
-        user2.setAge(24);
-        user2.setName("Daniel");
+        user2.setPassword(24);
+        user2.setUsername("Daniel Franch");
 
         this.users.add(user2);
 
