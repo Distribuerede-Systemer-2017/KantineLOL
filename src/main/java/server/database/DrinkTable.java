@@ -15,7 +15,7 @@ public class DrinkTable {
         Drink smoothie = new Drink();
         smoothie.setId(1);
         smoothie.setPrice(19.95);
-        smoothie.setName("smoothie");q
+        smoothie.setName("smoothie");
 
         Drink juice = new Drink();
         juice.setId(2);
