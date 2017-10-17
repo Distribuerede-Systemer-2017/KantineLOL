@@ -70,25 +70,3 @@ public class ImplDB {
     }
 }
 
-    /*public ArrayList<Order> getorders() {
-        ArrayList<Order> orders = new ArrayList<>();
-
-        try {
-            ResultSet results = getRecords("Order");
-
-                    while(results.next()) {
-                Order order = new Order(
-                        results.getInt("t")
-
-                );
-
-                orders.add(order);
-                    }
-                    }
-                    catch (Exception e) {     
-                    e.printStackTrace();
-
-
-
-
-    }                                    */
