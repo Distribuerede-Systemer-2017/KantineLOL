@@ -2,6 +2,8 @@
 
 public class MainController {
 
+
+
     public class CreateUser(){
 
         // If statement som sikre sig at et password er på mere end 3 tegn
