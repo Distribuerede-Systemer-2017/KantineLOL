@@ -1,26 +1,26 @@
 package server.database;
 
 
-import server.models.User;
+import server.models.user;
 
 import java.util.ArrayList;
 
 public class UserTable {
 
-    private ArrayList<User> users;
+    private ArrayList<user> users;
     private static UserTable instance = null;
 
     protected UserTable() {
         this.users = new ArrayList<>();
 
-        User user1 = new User();
+        user user1 = new user();
         user1.setId(1);
         user1.setAge(26);
         user1.setName("Jesper Bruun");
 
         this.users.add(user1);
 
-        User user2 = new User();
+        user user2 = new user();
         user2.setId(2);
         user2.setAge(24);
         user2.setName("Daniel Franch");
@@ -36,16 +36,16 @@ public class UserTable {
         return instance;
     }
 
-    public void addUser(User user) {
+    public void addUser(user user) {
         this.users.add(user);
     }
 
-    public ArrayList<User> getUsers() {
+    public ArrayList<user> getUsers() {
         return this.users;
     }
 
-    public User findById(int id) {
-        for (User user : this.users) {
+    public user findById(int id) {
+        for (server.models.user user : this.users) {
             if (user.getId() == id) {
                 return user;
             }
