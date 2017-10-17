@@ -1,6 +1,6 @@
 package server.models;
 
-public class item {
+public class Item {
 
     private int id;
     private int productId;
@@ -30,7 +30,7 @@ public class item {
         this.orderId = orderId;
     }
 
-    public item(int id, int productId, int orderId) {
+    public Item(int id, int productId, int orderId) {
         this.id = id;
         this.productId = productId;
         this.orderId = orderId;
