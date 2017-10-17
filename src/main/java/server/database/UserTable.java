@@ -23,7 +23,7 @@ public class UserTable {
         User user2 = new User();
         user2.setId(2);
         user2.setAge(24);
-        user2.setName("Daniel Franch");
+        user2.setName("Daniel");
 
         this.users.add(user2);
 
