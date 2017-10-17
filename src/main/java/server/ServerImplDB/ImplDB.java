@@ -68,5 +68,48 @@ public class ImplDB {
 
         return products;
     }
+
+    public ResultSet getOrders(String tablename) throws Exception {
+
+        connection = getConnection();
+
+        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.order WHERE user_id  = 1");
+
+        //sql.setString(1, tablename);
+        System.out.println(sql.executeQuery());
+        return sql.executeQuery();
+    }
+
+    public ArrayList<Order> getOrders() {
+
+        ArrayList<Order> orders = new ArrayList<>();
+
+        try {
+            ResultSet results = getOrders("Order");
+
+            while (results.next()) {
+                System.out.println("processing order!");
+
+                Order order = new Order(
+                        results.getInt("id"),
+                        results.getString("date"),
+                        results.getInt("user_id")
+                );
+
+                orders.add(order);
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("orders");
+        System.out.println(orders);
+
+        return orders;
+
+    }
 }
+
 
