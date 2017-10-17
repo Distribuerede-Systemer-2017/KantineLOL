@@ -1,5 +1,4 @@
 package server.endpoints;
 
-public class UserEndpoint {
-
+public class LogInEndpoint {
 }
