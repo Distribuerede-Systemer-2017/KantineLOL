@@ -1,6 +1,6 @@
 package server.models;
 
-public class product {
+public class Product {
 
 
     private int type;
@@ -29,7 +29,7 @@ public class product {
         this.productPrice = productPrice;
     }
 
-    public product(int type, int id, String productName, String productPrice) {
+    public Product(int type, int id, String productName, String productPrice) {
         this.type = type;
         this.id = id;
         this.productName = productName;
