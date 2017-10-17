@@ -1,7 +1,7 @@
 package server.endpoints;
 
 import com.google.gson.Gson;
-import server.database.UserTable;
+import server.UserTable;
 import server.models.User;
 
 import javax.ws.rs.*;
