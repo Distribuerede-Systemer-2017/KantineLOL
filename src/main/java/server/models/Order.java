@@ -1,6 +1,6 @@
 package server.models;
 
-public class order {
+public class Order {
 
 
     private int id;
@@ -31,7 +31,7 @@ public class order {
         this.date = date;
     }
 
-    public order(int id, String date, int userId) {
+    public Order() {
         this.id = id;
         this.date = date;
         this.userId = userId;
