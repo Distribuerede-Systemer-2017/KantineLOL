@@ -32,11 +32,12 @@ public class ImplDB {
         return null;
     }
 
+    // Viser alle drikkevarer
     public ResultSet getRecords(String tablename) throws Exception {
 
         connection = getConnection();
 
-        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.product");
+        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.product WHERE type = 2");
 
         //sql.setString(1, tablename);
         System.out.println(sql.executeQuery());
@@ -69,6 +70,8 @@ public class ImplDB {
         return products;
     }
 
+
+    // Anvendes til at se brugerens historik over order
     public ResultSet getOrders(String tablename) throws Exception {
 
         connection = getConnection();
@@ -110,6 +113,47 @@ public class ImplDB {
         return orders;
 
     }
+
+    public ResultSet getFoods(String tablename) throws Exception {
+
+        connection = getConnection();
+
+        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.product WHERE type = 1");
+
+        //sql.setString(1, tablename);
+        System.out.println(sql.executeQuery());
+        return sql.executeQuery();
+    }
+
+    public ArrayList<Product> getFoods() {
+
+        ArrayList<Product> products = new ArrayList<>();
+
+        try {
+            ResultSet results = getFoods("Product");
+            System.out.println("results!: " + results);
+
+            while (results.next()) {
+                Product product = new Product(
+                        results.getInt("type"),
+                        results.getInt("id"),
+                        results.getString("name"),
+                        results.getString("price")
+                );
+
+                products.add(product);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return products;
+
+    }
 }
+
 
 
