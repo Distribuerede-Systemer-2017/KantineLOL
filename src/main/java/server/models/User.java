@@ -1,25 +1,34 @@
 package server.models;
 
+import server.utility.Digester;
+
 public class User {
 
-    private int Id;
+    private int id;
     private String username;
-    private int password;
+    private String password;
+    private Digester digester;
 
-    public int getPassword() {
-        return password;
-    }
-
-    public void setPassword(int password) {
+    public User(int id, String username, String password) {
+        this.id = id;
+        this.username = username;
         this.password = password;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = digester.hashWithSalt(password);
+    }
+
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getUsername() {

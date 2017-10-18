@@ -1,7 +1,6 @@
 package server.endpoints;
 
 import com.google.gson.Gson;
-import server.UserTable;
 import server.models.User;
 
 import javax.ws.rs.GET;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 
 public class CreateUserEndpoint {
 
-    @Path("/users")
+    /*@Path("/users")
     public class UserEndpoint {
 
         @GET
@@ -59,5 +58,5 @@ public class CreateUserEndpoint {
                     .build();
         }
 
-    }
+    }*/
 }

@@ -1,9 +1,11 @@
 package server.ServerImplDB;
 
 import server.models.Product;
+import server.models.User;
 import server.models.Order;
 
 
+import javax.jws.soap.SOAPBinding;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -36,9 +38,8 @@ public class ImplDB {
 
         connection = getConnection();
 
-        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.product");
+        PreparedStatement sql = connection.prepareStatement("SELECT * FROM "+tablename);
 
-        //sql.setString(1, tablename);
         System.out.println(sql.executeQuery());
         return sql.executeQuery();
     }
@@ -48,7 +49,7 @@ public class ImplDB {
         ArrayList<Product> products = new ArrayList<>();
 
         try {
-            ResultSet results = getRecords("Product");
+            ResultSet results = getRecords("product");
             System.out.println("results!: " + results);
 
             while (results.next()) {
@@ -69,47 +70,51 @@ public class ImplDB {
         return products;
     }
 
-    public ResultSet getOrders(String tablename) throws Exception {
+    public ArrayList<User> getUsers() {
 
-        connection = getConnection();
-
-        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.order WHERE user_id  = 1");
-
-        //sql.setString(1, tablename);
-        System.out.println(sql.executeQuery());
-        return sql.executeQuery();
-    }
-
-    public ArrayList<Order> getOrders() {
-
-        ArrayList<Order> orders = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<>();
 
         try {
-            ResultSet results = getOrders("Order");
+            ResultSet results = getRecords("user");
 
             while (results.next()) {
-                System.out.println("processing order!");
 
-                Order order = new Order(
+                User user = new User(
                         results.getInt("id"),
-                        results.getString("date"),
-                        results.getInt("user_id")
+                        results.getString("username"),
+                        results.getString("password")
                 );
 
-                orders.add(order);
-
+                users.add(user);
 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println("orders");
-        System.out.println(orders);
-
-        return orders;
-
+        return users;
     }
 }
 
+    /*public ArrayList<Order> getorders() {
+        ArrayList<Order> orders = new ArrayList<>();
 
+        try {
+            ResultSet results = getRecords("Order");
+
+                    while(results.next()) {
+                Order order = new Order(
+                        results.getInt("t")
+
+                );
+
+                orders.add(order);
+                    }
+                    }
+                    catch (Exception e) {     
+                    e.printStackTrace();
+
+
+
+
+    }                                    */
