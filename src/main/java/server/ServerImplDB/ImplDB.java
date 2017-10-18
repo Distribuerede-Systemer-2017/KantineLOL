@@ -114,6 +114,7 @@ public class ImplDB {
 
     }
 
+    // Til Madvarer
     public ResultSet getFoods(String tablename) throws Exception {
 
         connection = getConnection();
