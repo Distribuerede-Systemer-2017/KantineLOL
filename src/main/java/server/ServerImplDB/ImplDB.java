@@ -1,11 +1,9 @@
 package server.ServerImplDB;
 
 import server.models.Product;
-import server.models.User;
 import server.models.Order;
 
 
-import javax.jws.soap.SOAPBinding;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -34,12 +32,14 @@ public class ImplDB {
         return null;
     }
 
+    // Viser alle drikkevarer
     public ResultSet getRecords(String tablename) throws Exception {
 
         connection = getConnection();
 
-        PreparedStatement sql = connection.prepareStatement("SELECT * FROM "+tablename);
+        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.product WHERE type = 2");
 
+        //sql.setString(1, tablename);
         System.out.println(sql.executeQuery());
         return sql.executeQuery();
     }
@@ -49,7 +49,7 @@ public class ImplDB {
         ArrayList<Product> products = new ArrayList<>();
 
         try {
-            ResultSet results = getRecords("product");
+            ResultSet results = getRecords("Product");
             System.out.println("results!: " + results);
 
             while (results.next()) {
@@ -70,51 +70,90 @@ public class ImplDB {
         return products;
     }
 
-    public ArrayList<User> getUsers() {
 
-        ArrayList<User> users = new ArrayList<>();
+    // Anvendes til at se brugerens historik over order
+    public ResultSet getOrders(String tablename) throws Exception {
+
+        connection = getConnection();
+
+        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.order WHERE user_id  = 1");
+
+        //sql.setString(1, tablename);
+        System.out.println(sql.executeQuery());
+        return sql.executeQuery();
+    }
+
+    public ArrayList<Order> getOrders() {
+
+        ArrayList<Order> orders = new ArrayList<>();
 
         try {
-            ResultSet results = getRecords("user");
+            ResultSet results = getOrders("Order");
 
             while (results.next()) {
+                System.out.println("processing order!");
 
-                User user = new User(
+                Order order = new Order(
                         results.getInt("id"),
-                        results.getString("username"),
-                        results.getString("password")
+                        results.getString("date"),
+                        results.getInt("user_id")
                 );
 
-                users.add(user);
+                orders.add(order);
+
 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return users;
+        System.out.println("orders");
+        System.out.println(orders);
+
+        return orders;
+
+    }
+
+    public ResultSet getFoods(String tablename) throws Exception {
+
+        connection = getConnection();
+
+        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.product WHERE type = 1");
+
+        //sql.setString(1, tablename);
+        System.out.println(sql.executeQuery());
+        return sql.executeQuery();
+    }
+
+    public ArrayList<Product> getFoods() {
+
+        ArrayList<Product> products = new ArrayList<>();
+
+        try {
+            ResultSet results = getFoods("Product");
+            System.out.println("results!: " + results);
+
+            while (results.next()) {
+                Product product = new Product(
+                        results.getInt("type"),
+                        results.getInt("id"),
+                        results.getString("name"),
+                        results.getString("price")
+                );
+
+                products.add(product);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return products;
+
     }
 }
 
-    /*public ArrayList<Order> getorders() {
-        ArrayList<Order> orders = new ArrayList<>();
-
-        try {
-            ResultSet results = getRecords("Order");
-
-                    while(results.next()) {
-                Order order = new Order(
-                        results.getInt("t")
-
-                );
-
-                orders.add(order);
-                    }
-                    }
-                    catch (Exception e) {     
-                    e.printStackTrace();
 
 
-
-
-    }                                    */
