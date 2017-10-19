@@ -7,7 +7,7 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private Digester digester;
+    private Digester digester = new Digester();
 
     public User(int id, String username, String password) {
         this.id = id;
@@ -15,12 +15,16 @@ public class User {
         this.password = password;
     }
 
+    public User () {
+
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
-        this.password = digester.hashWithSalt(password);
+        this.password = password; //digester.hashWithSalt(password);
     }
 
     public int getId() {
