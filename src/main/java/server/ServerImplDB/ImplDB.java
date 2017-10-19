@@ -2,7 +2,6 @@ package server.ServerImplDB;
 
 import server.models.Product;
 import server.models.Order;
-import server.models.User;
 
 
 import java.sql.*;
@@ -24,7 +23,7 @@ public class ImplDB {
             connection = DriverManager
                     .getConnection("jdbc:mysql://distribueredesystemer." +
                             "cqsg17giwvxa.eu-central-1.rds.amazonaws.com:3306/lol", "dis2017", "doekdis2017");
-
+            System.out.println("Connection - - -- - - - - -- - - -- !: " + connection);
             return connection;
         } catch (Exception e) {
             System.out.println("Ramt exception!");
@@ -71,50 +70,6 @@ public class ImplDB {
         return products;
     }
 
-    public boolean createUser(User user) throws IllegalArgumentException {
-        try {
-
-            PreparedStatement createUser = connection
-                    .prepareStatement("INSERT INTO user (username, password) VALUES (?,?)");
-
-            createUser.setString(1, user.getUsername());
-            createUser.setInt(2, user.getPassword());
-
-            int rowsAffected = createUser.executeUpdate();
-            if (rowsAffected == 1) {
-                return true;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public ArrayList<User> getUser() {
-
-        ArrayList<User> users = new ArrayList<>();
-
-        try {
-            ResultSet results = getRecords("user");
-            System.out.println("results!: " + results);
-
-            while (results.next()) {
-                User user = new User(
-                        results.getInt("id"),
-                        results.getInt("password"),
-                        results.getString("username")
-                );
-
-                users.add(user);
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return users;
-    }
 
     // Anvendes til at se brugerens historik over order
     public ResultSet getOrders(String tablename) throws Exception {
