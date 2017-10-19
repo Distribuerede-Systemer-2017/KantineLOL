@@ -8,6 +8,7 @@ public class Order {
     private int id;
     private int userId;
     private String date;
+
     private ArrayList<Item> items = new ArrayList();
 
 
@@ -15,10 +16,8 @@ public class Order {
         return items;
     }
 
-    public ArrayList addItem(Item item){
+    public void addItem(Item item){
         items.add(item);
-
-        return items;
     }
 
     public int getId() {
