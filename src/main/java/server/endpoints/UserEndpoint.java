@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;
 import server.controller.UserController;
 import server.models.User;
+import server.models.Order;
 import server.utility.Digester;
 
 import javax.ws.rs.*;
@@ -50,8 +51,11 @@ public class UserEndpoint {
     @Path("/login")
     @POST
     public Response authorizeUser(String data) throws Exception {
+
         Token token = new Token();
+
         User user = new Gson().fromJson(data, User.class);
+
         User userFound = userProvider.authorizeUser(user.getUsername(), user.getPassword());
 
         if (userFound != null){
@@ -79,4 +83,27 @@ public class UserEndpoint {
         }
     }
 
+
+    @Path("/order")
+    @POST
+    public Response createOrder(String data) throws Exception {
+        Order order = new Gson().fromJson(data, Order.class);
+        if(userProvider.createOrder(order)) {
+            return Response.status(200).type("application/json").entity(new Gson().toJson(order)).build();
+        } else {
+            return null;
+        }
+
+    }
+
+    @Path("/order/{orderId}")
+    @POST
+    public Response addProductToOrder(@PathParam("orderId") int orderId, String data) throws Exception {
+        if(userProvider.addProductToOrder(data, orderId)) {
+            return Response.status(200).build();
+        } else {
+            return Response.status(400).build();
+        }
+    }
 }
+

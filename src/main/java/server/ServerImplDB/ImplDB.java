@@ -2,8 +2,6 @@ package server.ServerImplDB;
 
 import server.models.Product;
 import server.models.Order;
-
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -13,7 +11,6 @@ public class ImplDB {
 
     public static Connection getConnection() throws Exception {
         System.out.println("Get connection!");
-        Class.forName("com.mysql.jdbc.Driver");
         try {
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("try");
@@ -35,6 +32,7 @@ public class ImplDB {
         }
         return null;
     }
+
 }
 
 
