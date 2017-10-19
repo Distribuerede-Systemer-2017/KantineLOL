@@ -1,15 +1,12 @@
 package server.endpoints;
 
 import com.google.gson.Gson;
-import server.ServerImplDB.ImplDB;
 import server.controller.UserController;
 import server.models.User;
 import server.models.Order;
-import server.utility.Digester;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 
 import server.providers.UserProvider;
 import server.utility.Token;
