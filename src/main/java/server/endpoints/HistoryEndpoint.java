@@ -11,7 +11,7 @@ import server.models.Order;
 import server.providers.HistoryProvider;;
 
 @Path("/order")
-public class OrderEndpoint {
+public class HistoryEndpoint {
 
     @GET
     public Response getAllProducts() {
