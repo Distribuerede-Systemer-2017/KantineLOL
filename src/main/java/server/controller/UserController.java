@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class UserController {
 
-    private Digester digester;
-    private UserProvider userProvider;
+    private Digester digester = new Digester();
+    private UserProvider userProvider = new UserProvider();
 
     public boolean addUser(User user) {
         String hashedPassword = digester.hashWithSalt(user.getPassword());
