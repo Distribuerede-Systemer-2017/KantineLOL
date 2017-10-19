@@ -79,11 +79,17 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>6.0.3</version>
         </dependency>
+         <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-log4j12</artifactId>
+         <version>1.8.0-alpha2</version>
+         </dependency>
         <!-- uncomment this to get JSON support
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-binding</artifactId>
         </dependency>
+
         -->
     </dependencies>
     <properties>
