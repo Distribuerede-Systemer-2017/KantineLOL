@@ -9,8 +9,8 @@ import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;
 import server.models.Order;;
 
-@Path("/order")
-public class OrderEndpoint {
+@Path("/history")
+public class HistoryEndpoint {
 
     @GET
     public Response getAllProducts() {
