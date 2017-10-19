@@ -9,18 +9,19 @@ import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;
 import server.models.Product;;
 
-@Path("/product")
-public class ProductEndpoint {
+import javax.ws.rs.Path;
+
+@Path("/Food")
+public class FoodEndpoint {
 
     @GET
-    public Response getAllProducts() {
+    public Response getAllFoods() {
 
         ImplDB serverImplDB = new ImplDB();
-        ArrayList<Product> allProducts = new ImplDB().getProducts();
-        return Response.status(200).type("application/json").entity(new Gson().toJson(allProducts)).build();
+        ArrayList<Product> allFoods = new ImplDB().getFoods();
+        return Response.status(200).type("application/json").entity(new Gson().toJson(allFoods)).build();
 
-
-
-    }
 
 }
+}
+
