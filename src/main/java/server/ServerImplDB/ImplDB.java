@@ -39,7 +39,7 @@ public class ImplDB {
 
         PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.product WHERE type = 2");
 
-        //sql.setString(1, tablename);
+
         System.out.println(sql.executeQuery());
         return sql.executeQuery();
     }
@@ -72,13 +72,12 @@ public class ImplDB {
 
 
     // Anvendes til at se brugerens historik over order
-    public ResultSet getOrders(String tablename) throws Exception {
+    public ResultSet getHistorys(String tablename) throws Exception {
 
-        connection = getConnection();
 
         PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.order WHERE user_id  = 1");
 
-        //sql.setString(1, tablename);
+
         System.out.println(sql.executeQuery());
         return sql.executeQuery();
     }
@@ -87,8 +86,9 @@ public class ImplDB {
 
         ArrayList<Order> orders = new ArrayList<>();
 
+
         try {
-            ResultSet results = getOrders("Order");
+            ResultSet results = getHistorys("Order");
 
             while (results.next()) {
                 System.out.println("processing order!");
@@ -107,8 +107,6 @@ public class ImplDB {
             e.printStackTrace();
         }
 
-        System.out.println("orders");
-        System.out.println(orders);
 
         return orders;
 
@@ -116,11 +114,10 @@ public class ImplDB {
 
     public ResultSet getFoods(String tablename) throws Exception {
 
-        connection = getConnection();
 
         PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.product WHERE type = 1");
 
-        //sql.setString(1, tablename);
+
         System.out.println(sql.executeQuery());
         return sql.executeQuery();
     }
@@ -152,8 +149,14 @@ public class ImplDB {
         }
         return products;
 
+
     }
 }
+
+
+
+
+
 
 
 
