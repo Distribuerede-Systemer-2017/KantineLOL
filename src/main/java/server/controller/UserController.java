@@ -1,27 +1,20 @@
 package server.controller;
 
 import server.models.User;
-<<<<<<< HEAD:src/main/java/logic/controller/UserController.java
 import server.providers.UserProvider;
 
-=======
 import server.utility.Digester;
 import server.providers.UserProvider;
->>>>>>> origin/historik:src/main/java/server/controller/UserController.java
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 
 public class UserController {
 
-<<<<<<< HEAD:src/main/java/logic/controller/UserController.java
-    public User validateUserCreation(String password, String username) throws IllegalArgumentException {
-
-=======
     private Digester digester = new Digester();
     private UserProvider userProvider = new UserProvider();
 
-    public boolean addUser(User user) {
+    public boolean addUser(User user){
         String hashedPassword = digester.hashWithSalt(user.getPassword());
         user.setPassword(hashedPassword);
         boolean result = userProvider.createUser(user);
