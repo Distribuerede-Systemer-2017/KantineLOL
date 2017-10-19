@@ -1,11 +1,11 @@
-package server.models;
+package server.utility;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.FileReader;
 
-public class config {
+public class Config {
 
 
     private static String serverUrl;
@@ -30,7 +30,7 @@ public class config {
     }
 
     public static void setServerUrl(String serverUrl) {
-        config.serverUrl = serverUrl;
+        Config.serverUrl = serverUrl;
     }
 
 }

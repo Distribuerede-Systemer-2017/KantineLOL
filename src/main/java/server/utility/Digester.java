@@ -14,6 +14,7 @@ public class Digester {
         }
     }
 
+
     public void setSalt(String salt) {
         this.salt = salt;
     }
