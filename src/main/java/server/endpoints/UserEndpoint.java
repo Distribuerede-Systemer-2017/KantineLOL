@@ -1,8 +1,10 @@
 package server.endpoints;
 
 import com.google.gson.Gson;
-import server.database.UserTable;
+import server.ServerImplDB.ImplDB;
+import server.models.Product;
 import server.models.User;
+import server.providers.UserProvider;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -10,48 +12,29 @@ import java.util.ArrayList;
 
 @Path("/users")
 public class UserEndpoint {
+    UserProvider userProvider = new UserProvider();
 
-    @GET
-    public Response getUsers(){
+    /*@GET
+    public Response getAllUsers() {
 
-        UserTable userTable = UserTable.getInstance();
-        ArrayList<User> users = userTable.getUsers();
+        ImplDB serverImplDB = new ImplDB();
+        ArrayList<User> allUsers = new ImplDB().getUsers();
+        return Response.status(200).type("application/json").entity(new Gson().toJson(allUsers)).build();
 
-        return Response
-                .status(200)
-                .type("application/json")
-                .entity(new Gson().toJson(users))
-                .build();
-    }
+    }*/
 
-    @GET
-    @Path("{id}")
-    public Response getUserById(@PathParam("id") int id){
-
-        //Lidt hjælp
-        //
-        UserTable userTable = UserTable.getInstance();
-        User foundUser = userTable.findById(id);
-
-        return Response
-                .status(200)
-                .type("application/json")
-                .entity(new Gson().toJson(foundUser))
-                .build();
-    }
-
+    @Path("/login")
     @POST
-    public Response createUser(String jsonUser) {
+    public Response authorizeUser(String data) throws Exception {
+        User user = new Gson().fromJson(data, User.class);
+        User userFound = userProvider.logIn(user.getUsername(), user.getPassword());
 
-        UserTable userTable = UserTable.getInstance();
-        User newUser = new Gson().fromJson(jsonUser, User.class);
-        userTable.addUser(newUser);
+        if (userFound != null){
+            return Response.status(200).entity(new Gson().toJson(userFound)).build();
+        } else {
+            return Response.status(400).entity("Error").build();
+        }
 
-        return Response
-                .status(200)
-                .type("application/json")
-                .entity("{\"userCreated\":\"true\"}")
-                .build();
     }
 
 }

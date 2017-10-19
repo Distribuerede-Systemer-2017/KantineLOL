@@ -1,4 +1,4 @@
-package logic.controller;
+package server.controller;
 
 public class MainController {
 }

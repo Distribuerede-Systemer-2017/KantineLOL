@@ -1,16 +1,34 @@
 package server.models;
 
-public class user {
+import server.utility.Digester;
 
+public class User {
 
     private int id;
     private String username;
     private String password;
+    private Digester digester = new Digester();
 
+    public User(int id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User () {
+
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password; //digester.hashWithSalt(password);
+    }
 
     public int getId() {
         return id;
-
     }
 
     public void setId(int id) {
@@ -23,13 +41,5 @@ public class user {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
