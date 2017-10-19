@@ -1,10 +1,20 @@
 package server.models;
 
 public class Item {
+    int id;
+    int products_id;
+    int order_id;
+    Product product;
 
-    private int id;
-    private int productId;
-    private int orderId;
+    public Item(int id, int products_id, int order_id) {
+        this.id = id;
+        this.products_id = products_id;
+        this.order_id = order_id;
+    }
+
+    public Item() {
+
+    }
 
     public int getId() {
         return id;
@@ -14,26 +24,27 @@ public class Item {
         this.id = id;
     }
 
-    public int getProductId() {
-        return productId;
+    public int getProducts_id() {
+        return products_id;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProducts_id(int products_id) {
+        this.products_id = products_id;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public void setProduct(Product product){
+        this.product = product;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public Product getProduct(){
+        return product;
     }
 
-    public Item(int id, int productId, int orderId) {
-        this.id = id;
-        this.productId = productId;
-        this.orderId = orderId;
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
     }
 }
-
