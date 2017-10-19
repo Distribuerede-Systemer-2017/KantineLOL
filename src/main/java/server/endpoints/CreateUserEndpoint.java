@@ -11,23 +11,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
+@Path("/create")
 public class CreateUserEndpoint {
 
-    @Path("/users")
-    public class UserEndpoint {
 
-        @GET
-        public Response getUsers() {
 
-            UserTable userTable = UserTable.getInstance();
-            ArrayList<User> users = userTable.getUsers();
 
-            return Response
-                    .status(200)
-                    .type("application/json")
-                    .entity(new Gson().toJson(users))
-                    .build();
-        }
 
         @GET
         @Path("{id}")

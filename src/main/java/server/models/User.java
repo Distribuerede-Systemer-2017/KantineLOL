@@ -2,9 +2,16 @@ package server.models;
 
 public class User {
 
-    private int Id;
+    private int id;
     private String username;
     private int password;
+
+    public User(int password, int id, String username) {
+        this.password = password;
+        this.id = id;
+        this.username = username;
+
+    }
 
     public int getPassword() {
         return password;
@@ -15,11 +22,11 @@ public class User {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getUsername() {
