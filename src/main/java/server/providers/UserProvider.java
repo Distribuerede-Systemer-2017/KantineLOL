@@ -1,39 +1,33 @@
 package server.providers;
 
-import server.models.Order;
 import server.models.User;
-import server.utility.Digester;
-
+import server.ServerImplDB.ImplDB;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-
-import static server.ServerImplDB.ImplDB.getConnection;
+import java.sql.SQLException;
+import java.sql.*;
 
 public class UserProvider {
 
-    public User logIn(String username, String password) {
+    private Connection connection;
+
+
+    public boolean createUser(User user) throws IllegalArgumentException {
         try {
-            User user = new User();
-            Digester digester = new Digester();
 
-            PreparedStatement sql = getConnection().prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
-            sql.setString(1, username);
-            sql.setString(2, password);
+            PreparedStatement createUser = connection
+                    .prepareStatement("INSERT INTO user (username, password) VALUES (?,?)");
 
-            ResultSet resultSet = sql.executeQuery();
+            createUser.setString(1, user.getUsername());
+            createUser.setString(2, user.getPassword());
 
-            while (resultSet.next()) {
-                user.setId(resultSet.getInt("id"));
-                user.setUsername(resultSet.getString("username"));
-                user.setPassword(resultSet.getString("password"));
+            int rowsAffected = createUser.executeUpdate();
+            if (rowsAffected == 1) {
+                return true;
             }
-            System.out.println(user.getUsername() + user.getPassword());
-            return user;
-        } catch (Exception e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        return null;
-    }
 
+        }
+        return false;
+    }
 }
