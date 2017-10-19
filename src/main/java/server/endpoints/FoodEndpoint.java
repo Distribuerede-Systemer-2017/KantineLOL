@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;
-import server.models.Product;;
+import server.models.Product;
+import server.providers.FoodProvider;;
 
 import javax.ws.rs.Path;
 
@@ -18,7 +19,7 @@ public class FoodEndpoint {
     public Response getAllFoods() {
 
         ImplDB serverImplDB = new ImplDB();
-        ArrayList<Product> allFoods = new ImplDB().getFoods();
+        ArrayList<Product> allFoods = new FoodProvider().getFoods();
         return Response.status(200).type("application/json").entity(new Gson().toJson(allFoods)).build();
 
 

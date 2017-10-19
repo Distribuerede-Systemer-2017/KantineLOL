@@ -7,16 +7,17 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;
-import server.models.Order;;
+import server.models.Order;
+import server.providers.HistoryProvider;;
 
-@Path("/order")
-public class OrderEndpoint {
+@Path("/history")
+public class HistoryEndpoint {
 
     @GET
     public Response getAllProducts() {
 
         ImplDB serverImplDB = new ImplDB();
-        ArrayList<Order> allOrders = new ImplDB().getOrders();
+        ArrayList<Order> allOrders = new HistoryProvider().getOrders();
 
         return Response.status(200).type("application/json").entity(new Gson().toJson(allOrders)).build();
 
