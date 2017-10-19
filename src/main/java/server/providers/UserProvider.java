@@ -12,6 +12,7 @@ import static server.ServerImplDB.ImplDB.getConnection;
 
 public class UserProvider {
 
+
     public User logIn(String username, String password) {
         try {
             User user = new User();
