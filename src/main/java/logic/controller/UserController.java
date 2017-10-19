@@ -1,24 +1,25 @@
-import server.models.User;
-
 package logic.controller;
 
 import server.models.User;
-//import server.providers.UserProvider;
-
+import server.utility.Digester;
+import server.providers.UserProvider;
 import java.util.ArrayList;
+
+
 
 public class UserController {
 
-
+    private Digester digester;
+    private UserProvider userProvider;
 
     public boolean addUser(User user) {
-        String hashedPassword = dig.hashWithSalt(user.getPassword());
+        String hashedPassword = digester.hashWithSalt(user.getPassword());
         user.setPassword(hashedPassword);
-        boolean result = dbConnection.addUser(user);
+        boolean result = userProvider.createUser(user);
         return result;
     }
 }
-
+/*
     public UserController
 
     public User validateUserCreation(String password,
@@ -47,5 +48,4 @@ public class UserController {
         //NOTE: Jeg havde glemt at man ikke skal tage højde for e-mail fordi vi bruger USERNAME og ikke Email
 
     }
-}
-
+} */

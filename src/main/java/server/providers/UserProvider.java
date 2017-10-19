@@ -18,7 +18,7 @@ public class UserProvider {
                     .prepareStatement("INSERT INTO user (username, password) VALUES (?,?)");
 
             createUser.setString(1, user.getUsername());
-            createUser.setInt(2, user.getPassword());
+            createUser.setString(2, user.getPassword());
 
             int rowsAffected = createUser.executeUpdate();
             if (rowsAffected == 1) {

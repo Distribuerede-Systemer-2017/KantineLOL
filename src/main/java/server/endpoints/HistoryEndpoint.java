@@ -10,8 +10,8 @@ import server.ServerImplDB.ImplDB;
 import server.models.Order;
 import server.providers.HistoryProvider;;
 
-@Path("/history")
-public class HistoryEndpoint {
+@Path("/order")
+public class OrderEndpoint {
 
     @GET
     public Response getAllProducts() {
