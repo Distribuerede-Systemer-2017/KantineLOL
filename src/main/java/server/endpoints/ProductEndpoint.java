@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;
 import server.models.Product;
-import server.providers.DrinkProvider;;
+import server.providers.DrinkProvider;
 import server.ServerImplDB.Kryptering;
 
 @Path("/drink")
@@ -30,10 +30,6 @@ public class ProductEndpoint {
                 .type("application/json")
                 .entity(krypteret)
                 .build();
-
-
-
-
     }
 
 }

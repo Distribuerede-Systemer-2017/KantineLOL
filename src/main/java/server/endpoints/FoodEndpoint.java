@@ -4,35 +4,26 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-
-
 import com.google.gson.Gson;
-import server.ServerImplDB.ImplDB;
 import server.ServerImplDB.Kryptering;
 import server.models.Product;
 import server.providers.FoodProvider;
-import server.utility.Globals;;
 
-import javax.ws.rs.Path;
-
-@Path("/Food")
+@Path("/food")
 public class FoodEndpoint {
 
     @GET
     public Response getAllFoods() {
 
-        //Globals.log.writeLog(getClass().getName(), this, "All foods shown", 1);
+        ArrayList<Product> allFoods = new FoodProvider().getFoods();
+        String string = new Gson().toJson(allFoods);
 
-        ArrayList<Product> allProducts = new FoodProvider().getFoods();
-        String json = new Gson().toJson(allProducts);
-        String krypteret = Kryptering.encryptdecrypt(json);
-        krypteret = new Gson().toJson(krypteret);
+        String encrypted = Kryptering.encryptdecrypt(string);
+        encrypted = new Gson().toJson(encrypted);
 
         return Response.status(200).type("application/json")
-                .entity(krypteret)
+                .entity(encrypted)
                 .build();
-
-
     }
 }
 
