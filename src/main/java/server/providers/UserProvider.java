@@ -50,7 +50,7 @@ public class UserProvider {
             connection = getConnection();
             PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.users WHERE username = ? AND password = ?");
             sql.setString(1, username);
-            sql.setString(2, password);
+            sql.setString(2, digester.hashWithSalt(password));
 
             ResultSet resultSet = sql.executeQuery();
 
@@ -89,25 +89,46 @@ public class UserProvider {
     }
 
     //et sql statement der sletter token
-    public User deleteToken (String token) throws Exception {
+    public boolean deleteToken (int id) throws Exception {
         try {
             User user = new User();
             connection = getConnection();
-            PreparedStatement sql = connection.prepareStatement("DELETE FROM users WHERE token = ?");
-            sql.setString(1,token);
+            PreparedStatement sql = connection.prepareStatement("UPDATE users SET token = '-' WHERE id = ?");
+            sql.setInt(1,id);
+
+            sql.executeUpdate();
+
+            user.setToken("-");
+
+            System.out.println("Logged out");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public User getUserFromToken (String token) throws Exception {
+        try {
+            User user = new User();
+            connection = getConnection();
+            PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.users WHERE token = ?");
+            sql.setString(1, token);
 
             ResultSet resultSet = sql.executeQuery();
 
             while (resultSet.next()) {
+                user.setId(resultSet.getInt("id"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
                 user.setToken(resultSet.getString("token"));
+
             }
-            System.out.println(user.getUsername() + user.getPassword() + user.getToken());
             return user;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-
 
 }

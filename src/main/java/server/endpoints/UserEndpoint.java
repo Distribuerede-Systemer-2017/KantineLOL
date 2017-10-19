@@ -64,13 +64,19 @@ public class UserEndpoint {
 
     }
 
-    /*@Path("/logout")
+    @Path("/logout")
     @POST
     public Response logout (String data) throws Exception {
         Token token = new Token();
 
-        User userFound = userProvider
+        User userFound = userProvider.getUserFromToken(data);
 
-    }*/
+        if (userProvider.deleteToken(userFound.getId())) {
+            return Response.status(200).entity("Logged out").build();
+
+        } else {
+            return Response.status(400).entity("Error").build();
+        }
+    }
 
 }

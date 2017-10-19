@@ -33,7 +33,7 @@ public class Token {
             sql = getConnection().prepareStatement("UPDATE lol.users SET token = ? WHERE id = ?");
             sql.setString(1, token);
             sql.setInt(2, userid);
-            ResultSet resultSet = sql.executeQuery();
+            sql.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }

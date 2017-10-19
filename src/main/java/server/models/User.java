@@ -24,11 +24,11 @@ public class User {
     }
 
     public String getPassword() {
-        return digester.hashWithSalt(password);
+        return password;
     }
 
     public void setPassword(String password) {
-        this.password = digester.hashWithSalt(password);
+        this.password = password;
     }
 
     public int getId() {
