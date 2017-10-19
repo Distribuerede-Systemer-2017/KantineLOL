@@ -7,16 +7,17 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;
-import server.models.Product;;
+import server.models.Product;
+import server.providers.DrinkProvider;;
 
-@Path("/product")
+@Path("/drink")
 public class ProductEndpoint {
 
     @GET
     public Response getAllProducts() {
 
         ImplDB serverImplDB = new ImplDB();
-        ArrayList<Product> allProducts = new ImplDB().getProducts();
+        ArrayList<Product> allProducts = new DrinkProvider().getProducts();
         return Response.status(200).type("application/json").entity(new Gson().toJson(allProducts)).build();
 
 
