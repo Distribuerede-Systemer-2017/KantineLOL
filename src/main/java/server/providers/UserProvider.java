@@ -5,6 +5,7 @@ import server.models.Order;
 import server.models.User;
 import server.utility.Digester;
 import server.controller.UserController;
+import server.utility.Token;
 
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.InternalServerErrorException;
@@ -28,10 +29,11 @@ public class UserProvider {
         try {
             connection = getConnection();
             PreparedStatement createUser = connection
-                    .prepareStatement("INSERT INTO lol.users (username, password) VALUES (?,?)");
+                    .prepareStatement("INSERT INTO lol.users (username, password, token) VALUES (?,?,?)");
 
             createUser.setString(1, user.getUsername());
             createUser.setString(2, user.getPassword());
+            createUser.setString(3, user.getToken());
 
             createUser.executeUpdate();
             return true;
@@ -65,18 +67,47 @@ public class UserProvider {
         return null;
     }
 
-    //en sql statement der gemmer en token
-    /*public User saveToken ( String username, String password, int token) throws Exception {
-        User user = new User();
-        connection = getConnection();
-        PreparedStatement sql = connection.prepareStatement("INSERT INTO users (username, password, token) VALUES (?)");
-        sql.setString(1, username);
-        sql.setString(2, password);
-        sql.setString(3, token);
+    //et sql statement der gemmer en token
+    public User getToken (String token) throws Exception {
+        try{
+            User user = new User();
+            connection = getConnection();
+            PreparedStatement sql = connection.prepareStatement("INSERT INTO users where id = ?)");
+            sql.setString(1, token);
 
-    }*/
+            ResultSet resultSet = sql.executeQuery();
 
-    //en sql statement der sletter token
+            while (resultSet.next()){
+                user.setToken(resultSet.getString("token"));
+            }
+            System.out.println(user.getUsername() + user.getPassword() + user.getToken());
+            return user;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //et sql statement der sletter token
+    public User deleteToken (String token) throws Exception {
+        try {
+            User user = new User();
+            connection = getConnection();
+            PreparedStatement sql = connection.prepareStatement("DELETE FROM users WHERE token = ?");
+            sql.setString(1,token);
+
+            ResultSet resultSet = sql.executeQuery();
+
+            while (resultSet.next()) {
+                user.setToken(resultSet.getString("token"));
+            }
+            System.out.println(user.getUsername() + user.getPassword() + user.getToken());
+            return user;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 }

@@ -19,18 +19,10 @@ public class UserEndpoint {
     private UserController userController = new UserController();
     private UserProvider userProvider = new UserProvider();
 
-    /*@GET
-    public Response getAllUsers() {
-        ImplDB serverImplDB = new ImplDB();
-        ArrayList<User> allUsers = new ImplDB().getUsers();
-        return Response.status(200).type("application/json").entity(new Gson().toJson(allUsers)).build();
-*/
-
 
     @POST
     @Path("/create")
     public Response createUser(String jsonUser) {
-
 
         int status = 0;
         try {
@@ -63,7 +55,7 @@ public class UserEndpoint {
         User userFound = userProvider.authorizeUser(user.getUsername(), user.getPassword());
 
         if (userFound != null){
-            String authToken = token.getToken();
+            String authToken = token.getToken(user.getUsername(), userFound.getId());
 
             return Response.status(200).entity(new Gson().toJson(authToken)).build();
         } else {
@@ -71,4 +63,14 @@ public class UserEndpoint {
         }
 
     }
+
+    /*@Path("/logout")
+    @POST
+    public Response logout (String data) throws Exception {
+        Token token = new Token();
+
+        User userFound = userProvider
+
+    }*/
+
 }
