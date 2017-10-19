@@ -33,11 +33,12 @@ public class ImplDB {
         return null;
     }
 
+    // Viser alle drikkevarer
     public ResultSet getRecords(String tablename) throws Exception {
 
         connection = getConnection();
 
-        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.product");
+        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.product WHERE type = 2");
 
         //sql.setString(1, tablename);
         System.out.println(sql.executeQuery());
@@ -114,27 +115,90 @@ public class ImplDB {
 
         return users;
     }
-}
 
-    /*public ArrayList<Order> getorders() {
+    // Anvendes til at se brugerens historik over order
+    public ResultSet getOrders(String tablename) throws Exception {
+
+        connection = getConnection();
+
+        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.order WHERE user_id  = 1");
+
+        //sql.setString(1, tablename);
+        System.out.println(sql.executeQuery());
+        return sql.executeQuery();
+    }
+
+    public ArrayList<Order> getOrders() {
+
         ArrayList<Order> orders = new ArrayList<>();
 
         try {
-            ResultSet results = getRecords("Order");
+            ResultSet results = getOrders("Order");
 
-                    while(results.next()) {
+            while (results.next()) {
+                System.out.println("processing order!");
+
                 Order order = new Order(
-                        results.getInt("t")
-
+                        results.getInt("id"),
+                        results.getString("date"),
+                        results.getInt("user_id")
                 );
 
                 orders.add(order);
-                    }
-                    }
-                    catch (Exception e) {     
-                    e.printStackTrace();
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("orders");
+        System.out.println(orders);
+
+        return orders;
+
+    }
+
+    public ResultSet getFoods(String tablename) throws Exception {
+
+        connection = getConnection();
+
+        PreparedStatement sql = connection.prepareStatement("SELECT * FROM lol.product WHERE type = 1");
+
+        //sql.setString(1, tablename);
+        System.out.println(sql.executeQuery());
+        return sql.executeQuery();
+    }
+
+    public ArrayList<Product> getFoods() {
+
+        ArrayList<Product> products = new ArrayList<>();
+
+        try {
+            ResultSet results = getFoods("Product");
+            System.out.println("results!: " + results);
+
+            while (results.next()) {
+                Product product = new Product(
+                        results.getInt("type"),
+                        results.getInt("id"),
+                        results.getString("name"),
+                        results.getString("price")
+                );
+
+                products.add(product);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return products;
+
+    }
+}
 
 
 
-
-    }                                    */

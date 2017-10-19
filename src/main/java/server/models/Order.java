@@ -31,10 +31,10 @@ public class Order {
         this.date = date;
     }
 
-    public Order() {
+    public Order(int id, String date, int user_id) {
         this.id = id;
         this.date = date;
-        this.userId = userId;
+        this.userId = user_id;
     }
 
 
