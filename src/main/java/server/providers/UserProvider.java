@@ -59,11 +59,50 @@ public class UserProvider {
             }
             System.out.println(user.getUsername() + user.getPassword());
             return user;
-        } catch (Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    public boolean createOrder(Order order) throws IllegalArgumentException {
 
+        try {
+            connection = getConnection();
+
+            PreparedStatement createOrder = connection
+                    .prepareStatement("INSERT INTO lol.order (date, user_id) VALUES (?,?)");
+
+            createOrder.setString(1, order.getDate());
+            createOrder.setInt(2, order.getUserId());
+
+            createOrder.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public boolean addProductToOrder(String products_id, int orderId) throws Exception {
+        try {
+            connection = getConnection();
+            PreparedStatement PS = connection
+                    .prepareStatement("INSERT INTO lol.items (products_id, order_id) VALUE (?, ?)");
+            PS.setInt(1, Integer.parseInt(products_id));
+            PS.setInt(2, orderId);
+
+            PS.executeUpdate();
+            return true;
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
+
