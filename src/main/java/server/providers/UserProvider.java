@@ -41,7 +41,7 @@ public class UserProvider {
         }
     }
 
-    public User logIn(String username, String password) {
+    public User authorizeUser (String username, String password) {
         try {
             User user = new User();
             Digester digester = new Digester();
@@ -64,6 +64,19 @@ public class UserProvider {
         }
         return null;
     }
+
+    //en sql statement der gemmer en token
+    /*public User saveToken ( String username, String password, int token) throws Exception {
+        User user = new User();
+        connection = getConnection();
+        PreparedStatement sql = connection.prepareStatement("INSERT INTO users (username, password, token) VALUES (?)");
+        sql.setString(1, username);
+        sql.setString(2, password);
+        sql.setString(3, token);
+
+    }*/
+
+    //en sql statement der sletter token
 
 
 }

@@ -24,7 +24,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = digester.hashWithSalt(password); //digester.hashWithSalt(password);
+        this.password = digester.hashWithSalt(password);
     }
 
     public int getId() {
