@@ -1,9 +1,16 @@
 package server.providers;
 
+import com.google.gson.Gson;
 import server.models.Order;
 import server.models.User;
 import server.utility.Digester;
+import server.controller.UserController;
 
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.InternalServerErrorException;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.xml.ws.Response;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,6 +18,7 @@ import java.util.ArrayList;
 import static server.ServerImplDB.ImplDB.getConnection;
 
 public class UserProvider {
+    UserController userController = new UserController();
 
 
     public User logIn(String username, String password) {
@@ -36,5 +44,6 @@ public class UserProvider {
         }
         return null;
     }
+
 
 }
