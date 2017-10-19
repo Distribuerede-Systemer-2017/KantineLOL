@@ -1,13 +1,8 @@
 package server.endpoints;
 
 import com.google.gson.Gson;
-<<<<<<< HEAD
 import server.UserTable;
 import server.models.User;
-=======
-import server.database.UserTable;
-import server.models.user;
->>>>>>> master
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -20,7 +15,7 @@ public class UserEndpoint {
     public Response getUsers(){
 
         UserTable userTable = UserTable.getInstance();
-        ArrayList<user> users = userTable.getUsers();
+        ArrayList<User> users = userTable.getUsers();
 
         return Response
                 .status(200)
@@ -36,7 +31,7 @@ public class UserEndpoint {
         //Lidt hjælp
         //
         UserTable userTable = UserTable.getInstance();
-        user foundUser = userTable.findById(id);
+        User foundUser = userTable.findById(id);
 
         return Response
                 .status(200)
@@ -49,7 +44,7 @@ public class UserEndpoint {
     public Response createUser(String jsonUser) {
 
         UserTable userTable = UserTable.getInstance();
-        user newUser = new Gson().fromJson(jsonUser, user.class);
+        User newUser = new Gson().fromJson(jsonUser, User.class);
         userTable.addUser(newUser);
 
         return Response

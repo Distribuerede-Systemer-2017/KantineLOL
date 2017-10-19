@@ -10,7 +10,7 @@ import server.ServerImplDB.ImplDB;
 import server.models.Order;
 import server.providers.HistoryProvider;;
 
-@Path("/history")
+@Path("/order")
 public class HistoryEndpoint {
 
     @GET
