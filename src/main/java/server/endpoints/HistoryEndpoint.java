@@ -14,7 +14,7 @@ import server.providers.HistoryProvider;;
 public class HistoryEndpoint {
 
     @GET
-    public Response getAllProducts() {
+    public Response getAllOrder() {
 
         ImplDB serverImplDB = new ImplDB();
         ArrayList<Order> allOrders = new HistoryProvider().getOrders();
@@ -23,5 +23,9 @@ public class HistoryEndpoint {
 
 
     }
+
+
+
+
 }
 

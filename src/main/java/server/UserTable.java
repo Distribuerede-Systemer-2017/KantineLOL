@@ -2,24 +2,30 @@ package server;
 
         import server.models.User;
 
+<<<<<<< HEAD:src/main/java/server/UserTable.java
         import java.util.ArrayList;
+=======
+import server.models.user;
+
+import java.util.ArrayList;
+>>>>>>> master:src/main/java/server/database/UserTable.java
 
 public class UserTable {
 
-    private ArrayList<User> users;
+    private ArrayList<user> users;
     private static UserTable instance = null;
 
     protected UserTable() {
         this.users = new ArrayList<>();
 
-        User user1 = new User();
+        user user1 = new user();
         user1.setId(1);
         user1.setPassword(1234);
         user1.setUsername("Jesper Bruun");
 
         this.users.add(user1);
 
-        User user2 = new User();
+        user user2 = new user();
         user2.setId(2);
         user2.setPassword(24);
         user2.setUsername("Daniel Franch");
@@ -35,16 +41,16 @@ public class UserTable {
         return instance;
     }
 
-    public void addUser(User user) {
+    public void addUser(user user) {
         this.users.add(user);
     }
 
-    public ArrayList<User> getUsers() {
+    public ArrayList<user> getUsers() {
         return this.users;
     }
 
-    public User findById(int id) {
-        for (User user : this.users) {
+    public user findById(int id) {
+        for (server.models.user user : this.users) {
             if (user.getId() == id) {
                 return user;
             }
