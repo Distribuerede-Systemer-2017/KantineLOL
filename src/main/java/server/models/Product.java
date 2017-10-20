@@ -8,7 +8,6 @@ public class Product {
     private String productName;
     private String productPrice;
 
-
     public void setId(int id) {
         this.id = id;
     }
@@ -34,5 +33,9 @@ public class Product {
         this.id = id;
         this.productName = productName;
         this.productPrice = productPrice;
+    }
+
+    public Product() {
+
     }
 }

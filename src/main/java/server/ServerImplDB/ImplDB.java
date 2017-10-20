@@ -1,11 +1,7 @@
 package server.ServerImplDB;
 
-import server.models.Product;
-import server.models.Order;
-
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class ImplDB {
 

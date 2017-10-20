@@ -10,8 +10,6 @@ import server.ServerImplDB.ImplDB;
 import server.models.Product;
 import server.providers.FoodProvider;;
 
-import javax.ws.rs.Path;
-
 @Path("/Food")
 public class FoodEndpoint {
 
@@ -20,6 +18,7 @@ public class FoodEndpoint {
 
         ImplDB serverImplDB = new ImplDB();
         ArrayList<Product> allFoods = new FoodProvider().getFoods();
+
         return Response.status(200).type("application/json").entity(new Gson().toJson(allFoods)).build();
 
 
