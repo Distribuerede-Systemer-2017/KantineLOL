@@ -1,6 +1,6 @@
 package server.utility;
 
-import com.auth0.jwt.JWT;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
