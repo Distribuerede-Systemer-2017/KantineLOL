@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
 import server.providers.UserProvider;
+import server.utility.Token;
 
 @Path("/users")
 public class UserEndpoint {
@@ -37,11 +38,10 @@ public class UserEndpoint {
             boolean result = userController.addUser(userCreated);
             //boolean result = userController.addUser(userCreated);
             status = 200;
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             if (e.getClass() == BadRequestException.class) {
                 status = 400;
-            } else if (e.getClass() == InternalServerErrorException.class){
+            } else if (e.getClass() == InternalServerErrorException.class) {
                 status = 500;
             }
 
@@ -55,17 +55,19 @@ public class UserEndpoint {
     }
 
     @Path("/login")
-    @POST
     public Response authorizeUser(String data) throws Exception {
+        Token token = new Token();
         User user = new Gson().fromJson(data, User.class);
-        User userFound = userProvider.logIn(user.getUsername(), user.getPassword());
+        User userFound = userProvider.authorizeUser(user.getUsername(), user.getPassword());
 
-        if (userFound != null){
-            return Response.status(200).entity(new Gson().toJson(userFound)).build();
+        if (userFound != null) {
+            String authToken = token.getToken(user.getUsername(), userFound.getId());
+
+            return Response.status(200).entity(new Gson().toJson(authToken)).build();
         } else {
-            return Response.status(400).entity("{\"user logged in\":\"false\"}").build();
+            return Response.status(400).entity("Error").build();
         }
-
     }
 }
+
 

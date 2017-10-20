@@ -7,12 +7,14 @@ public class User {
     private int id;
     private String username;
     private String password;
+    private String token;
     private Digester digester = new Digester();
 
     public User(int id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = digester.hashWithSalt(password);
+        this.token = token;
     }
 
     public User () {
@@ -41,5 +43,13 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
