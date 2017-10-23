@@ -1,14 +1,11 @@
 package server.endpoints;
 
 import com.google.gson.Gson;
-import server.ServerImplDB.ImplDB;
 import server.controller.UserController;
 import server.models.User;
-import server.utility.Digester;
-
+import server.models.Order;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 
 import server.providers.UserProvider;
 import server.utility.Token;
@@ -36,10 +33,8 @@ public class UserEndpoint {
             } else if (e.getClass() == InternalServerErrorException.class){
                 status = 500;
             }
-
         }
         return Response.status(status).type("application/json").entity("{\"userCreated\":\"true\"}").build();
-
     }
 
     @Path("/login")
@@ -56,7 +51,6 @@ public class UserEndpoint {
         } else {
             return Response.status(400).entity("Error").build();
         }
-
     }
 
     @Path("/logout")
@@ -70,6 +64,28 @@ public class UserEndpoint {
             return Response.status(200).entity("Logged out").build();
         } else {
             return Response.status(400).entity("Error").build();
+        }
+    }
+
+    @Path("/order")
+    @POST
+    public Response createOrder(String data) throws Exception {
+        Order order = new Gson().fromJson(data, Order.class);
+        if(userProvider.createOrder(order)) {
+            return Response.status(200).type("application/json").entity(new Gson().toJson(order)).build();
+        } else {
+            return null;
+        }
+
+    }
+
+    @Path("/order/{orderId}")
+    @POST
+    public Response addProductToOrder(@PathParam("orderId") int orderId, String data) throws Exception {
+        if(userProvider.addProductToOrder(data, orderId)) {
+            return Response.status(200).build();
+        } else {
+            return Response.status(400).build();
         }
     }
 
