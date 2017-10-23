@@ -69,13 +69,16 @@ public class UserEndpoint {
 
     @Path("/order")
     @POST
-    public Response createOrder(String data) throws Exception {
+    public Response createOrder(@HeaderParam("token") String token, String data) throws Exception {
+        User u = userProvider.getUserFromToken(token);
         Order order = new Gson().fromJson(data, Order.class);
-        if(userProvider.createOrder(order)) {
-            return Response.status(200).type("application/json").entity(new Gson().toJson(order)).build();
-        } else {
-            return null;
-        }
+
+
+        if (u!=null && token!=null && userProvider.createOrder(order)) {
+                return Response.status(200).type("application/json").entity(new Gson().toJson(order)).build();
+            } else {
+                return null;
+            }
 
     }
 
