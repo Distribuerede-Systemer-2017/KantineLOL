@@ -1,7 +1,6 @@
 package server.endpoints;
 
 import com.google.gson.Gson;
-import server.ServerImplDB.ImplDB;
 import server.controller.UserController;
 import server.models.User;
 import server.models.Order;
@@ -88,7 +87,7 @@ public class UserEndpoint {
         if (u!=null && token!=null && userProvider.createOrder(order)) {
             return Response.status(200).type("application/json").entity(new Gson().toJson(order)).build();
         } else {
-            return null;
+            return Response.status(400).entity("Error").build();
         }
 
 
@@ -100,7 +99,7 @@ public class UserEndpoint {
         if(userProvider.addProductToOrder(data, orderId)) {
             return Response.status(200).build();
         } else {
-            return Response.status(400).build();
+            return Response.status(400).entity("Error").build();
         }
     }
 

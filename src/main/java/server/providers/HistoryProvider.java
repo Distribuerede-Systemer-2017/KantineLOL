@@ -16,32 +16,12 @@ public class HistoryProvider {
     public ResultSet getOrders(String tablename) throws Exception {
 
 
-        PreparedStatement sql = getConnection().prepareStatement("SELECT * FROM lol.order WHERE user_id  = ?");
+        PreparedStatement sql = getConnection().prepareStatement("SELECT * FROM lol.order WHERE user_id  = 25");
 
 
         System.out.println(sql.executeQuery());
         return sql.executeQuery();
     }
-/*
-    public ResultSet getItemsByOrder(String tablename, int order_id) throws Exception {
-
-        PreparedStatement sql = getConnection().prepareStatement("SELECT * FROM lol.items where order_id = ?");
-        sql.setInt(1, order_id );
-
-        System.out.println(sql.executeQuery());
-        return sql.executeQuery();
-    }
-
-    public ResultSet getProductsByItem() throws Exception {
-
-        PreparedStatement sql = getConnection().prepareStatement("SELECT * FROM items i\n" +
-                "INNER JOIN product p\n" +
-                "ON i.products_id = p.id;");
-        //sql.setInt(1, order_id );
-        return sql.executeQuery();
-        //System.out.println(sql.executeQuery());
-        //return sql.executeQuery();
-    }*/
 
     public ResultSet getProductsByOrder(int order_id) throws Exception {
 

@@ -21,7 +21,7 @@ public class DrinkProvider {
         return sql.executeQuery();
     }
 
-    public ArrayList<Product> getProducts() {
+    public ArrayList<Product> getDrinks() {
 
         ArrayList<Product> products = new ArrayList<>();
 

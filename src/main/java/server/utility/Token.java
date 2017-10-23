@@ -6,7 +6,6 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import static server.ServerImplDB.ImplDB.getConnection;
 

@@ -1,6 +1,5 @@
 package server.providers;
 
-import server.ServerImplDB.ImplDB;
 import server.models.Product;
 
 import java.sql.PreparedStatement;

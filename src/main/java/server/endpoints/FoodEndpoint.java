@@ -24,11 +24,15 @@ public class FoodEndpoint {
 
         if(u!=null && token !=null) {
             ImplDB serverImplDB = new ImplDB();
-            ArrayList<Product> allFoods = new FoodProvider().getFoods();
-            String encrypt = new Gson().toJson(allFoods);
-            encrypt = Kryptering.encryptdecrypt(encrypt);
+            ArrayList<Product> allProducts = new FoodProvider().getFoods();
 
-            return Response.status(200).type("application/json").entity(encrypt).build();
+            String json = new Gson().toJson(allProducts);
+
+            String krypteret = Kryptering.encryptdecrypt(json);
+            krypteret = new Gson().toJson(krypteret);
+
+
+            return Response.status(200).type("application/json").entity(krypteret).build();
         } else {
             return Response.status(400).build();
         }

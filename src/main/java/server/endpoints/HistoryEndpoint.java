@@ -26,7 +26,7 @@ public class HistoryEndpoint {
 
             return Response.status(200).type("application/json").entity(new Gson().toJson(allOrders)).build();
         } else {
-            return Response.status(400).entity(new Gson().toJson("error")).build();
+            return Response.status(400).entity(new Gson().toJson("Error")).build();
         }
 
 
