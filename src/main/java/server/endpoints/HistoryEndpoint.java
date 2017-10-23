@@ -10,11 +10,11 @@ import server.ServerImplDB.ImplDB;
 import server.models.Order;
 import server.providers.HistoryProvider;;
 
-@Path("/order")
+@Path("/history")
 public class HistoryEndpoint {
 
     @GET
-    public Response getAllProducts() {
+    public Response getAllOrder() {
 
         ImplDB serverImplDB = new ImplDB();
         ArrayList<Order> allOrders = new HistoryProvider().getOrders();
@@ -24,4 +24,3 @@ public class HistoryEndpoint {
 
     }
 }
-

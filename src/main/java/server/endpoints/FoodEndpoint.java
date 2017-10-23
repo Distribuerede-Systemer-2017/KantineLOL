@@ -9,20 +9,21 @@ import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;
 import server.models.Product;
 import server.providers.FoodProvider;;
+import server.ServerImplDB.Kryptering;
 
 import javax.ws.rs.Path;
 
-@Path("/Food")
+@Path("/food")
 public class FoodEndpoint {
 
     @GET
     public Response getAllFoods() {
 
-        ImplDB serverImplDB = new ImplDB();
         ArrayList<Product> allFoods = new FoodProvider().getFoods();
-        return Response.status(200).type("application/json").entity(new Gson().toJson(allFoods)).build();
+        String encrypt = new Gson().toJson(allFoods);
+        encrypt = Kryptering.encryptdecrypt(encrypt);
 
-
-}
+        return Response.status(200).type("application/json").entity(encrypt).build();
+    }
 }
 

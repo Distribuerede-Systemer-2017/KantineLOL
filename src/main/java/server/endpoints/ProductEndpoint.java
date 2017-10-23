@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;
 import server.models.Product;
-import server.providers.DrinkProvider;;
+import server.providers.DrinkProvider;
+import server.ServerImplDB.Kryptering;
 
 @Path("/drink")
 public class ProductEndpoint {
@@ -18,10 +19,14 @@ public class ProductEndpoint {
 
         ImplDB serverImplDB = new ImplDB();
         ArrayList<Product> allProducts = new DrinkProvider().getProducts();
-        return Response.status(200).type("application/json").entity(new Gson().toJson(allProducts)).build();
+        String json = new Gson().toJson(allProducts);
+        String krypteret = Kryptering.encryptdecrypt(json);
+        krypteret = new Gson().toJson(krypteret);
 
-
-
+        return Response.status(200)
+                .type("application/json")
+                .entity(krypteret)
+                .build();
     }
 
 }

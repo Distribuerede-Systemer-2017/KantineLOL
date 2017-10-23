@@ -1,11 +1,24 @@
 package server.models;
 
+import java.util.ArrayList;
+
 public class Order {
 
 
     private int id;
     private int userId;
     private String date;
+
+    private ArrayList<Item> items = new ArrayList();
+
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void addItem(Item item){
+        items.add(item);
+    }
 
     public int getId() {
         return id;
@@ -37,8 +50,7 @@ public class Order {
         this.userId = user_id;
     }
 
+    public Order() {
 
+    }
 }
-
-
-

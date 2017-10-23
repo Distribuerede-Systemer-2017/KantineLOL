@@ -35,4 +35,8 @@ public class Product {
         this.productName = productName;
         this.productPrice = productPrice;
     }
+
+    public Product(){
+
+    }
 }

@@ -28,7 +28,6 @@ public class UserEndpoint {
         try {
             User userCreated = new Gson().fromJson(jsonUser, User.class);
             boolean result = userController.addUser(userCreated);
-            //boolean result = userController.addUser(userCreated);
             status = 200;
         } catch (Exception e)
         {
@@ -39,11 +38,7 @@ public class UserEndpoint {
             }
 
         }
-        return Response
-                .status(status)
-                .type("application/json")
-                .entity("{\"userCreated\":\"true\"}")
-                .build();
+        return Response.status(status).type("application/json").entity("{\"userCreated\":\"true\"}").build();
 
     }
 
@@ -73,7 +68,6 @@ public class UserEndpoint {
 
         if (userProvider.deleteToken(userFound.getId())) {
             return Response.status(200).entity("Logged out").build();
-
         } else {
             return Response.status(400).entity("Error").build();
         }

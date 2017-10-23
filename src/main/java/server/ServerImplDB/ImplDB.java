@@ -13,7 +13,6 @@ public class ImplDB {
 
     public static Connection getConnection() throws Exception {
         System.out.println("Get connection!");
-        Class.forName("com.mysql.jdbc.Driver");
         try {
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("try");
@@ -27,7 +26,7 @@ public class ImplDB {
             //.getConnection("jdbc:mysql://localhost:3306/DIS_Project?useSSL=false&serverTimezone=GMT", "root", "hej");
 
 
-            System.out.println("Connection!: " + connection);
+            System.out.println("Connection - - -- - - - - -- - - -- !: " + connection);
             return connection;
         } catch (Exception e) {
             System.out.println("Ramt exception!");
@@ -35,6 +34,7 @@ public class ImplDB {
         }
         return null;
     }
+
 }
 
 
