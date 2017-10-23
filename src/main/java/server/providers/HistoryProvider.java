@@ -16,7 +16,7 @@ public class HistoryProvider {
     public ResultSet getOrders(String tablename) throws Exception {
 
 
-        PreparedStatement sql = getConnection().prepareStatement("SELECT * FROM lol.order WHERE user_id  = 1");
+        PreparedStatement sql = getConnection().prepareStatement("SELECT * FROM lol.order WHERE user_id  = ?");
 
 
         System.out.println(sql.executeQuery());
@@ -82,6 +82,7 @@ public class HistoryProvider {
 
         for(int i = 0; i <= orders.size(); i++){
             try {
+
                 Order order = orders.get(i);
                 ResultSet productResults = getProductsByOrder(order.getId());
 

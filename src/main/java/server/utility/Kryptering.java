@@ -1,4 +1,4 @@
-package server.ServerImplDB;
+package server.utility;
 
 public class Kryptering {
 
