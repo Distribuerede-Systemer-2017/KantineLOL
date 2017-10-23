@@ -24,7 +24,7 @@ public class ImplDB {
             //.getConnection("jdbc:mysql://localhost:3306/DIS_Project?useSSL=false&serverTimezone=GMT", "root", "hej");
 
 
-            System.out.println("Connection!: " + connection);
+            System.out.println("Connection - - -- - - - - -- - - -- !: " + connection);
             return connection;
         } catch (Exception e) {
             System.out.println("Ramt exception!");

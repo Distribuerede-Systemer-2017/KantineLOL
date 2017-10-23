@@ -15,7 +15,9 @@ public class HistoryProvider {
 
     public ResultSet getOrders(String tablename) throws Exception {
 
-        PreparedStatement sql = getConnection().prepareStatement("SELECT * FROM lol.order where user_id = 1");
+
+        PreparedStatement sql = getConnection().prepareStatement("SELECT * FROM lol.order WHERE user_id  = 1");
+
 
         System.out.println(sql.executeQuery());
         return sql.executeQuery();

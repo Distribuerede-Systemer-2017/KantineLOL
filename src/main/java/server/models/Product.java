@@ -2,10 +2,12 @@ package server.models;
 
 public class Product {
 
+
     private int type;
     private int id;
     private String productName;
     private String productPrice;
+
 
     public void setId(int id) {
         this.id = id;

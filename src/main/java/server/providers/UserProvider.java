@@ -61,7 +61,7 @@ public class UserProvider {
             }
             System.out.println(user.getUsername() + user.getPassword());
             return user;
-        } catch (Exception e) {
+        } catch (Exception e ) {
             e.printStackTrace();
         }
         return null;
@@ -94,11 +94,11 @@ public class UserProvider {
             User user = new User();
             connection = getConnection();
             PreparedStatement sql = connection.prepareStatement("UPDATE users SET token = '-' WHERE id = ?");
-            sql.setInt(1, id);
+            sql.setInt(1,id);
 
             sql.executeUpdate();
 
-            user.setToken("");
+            user.setToken("-");
 
             System.out.println("Logged out");
             return true;
@@ -170,4 +170,3 @@ public class UserProvider {
         return false;
     }
 }
-

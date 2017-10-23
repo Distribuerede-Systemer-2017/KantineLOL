@@ -1,7 +1,6 @@
 package server.endpoints;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -9,9 +8,9 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;
 import server.models.Order;
-import server.models.User;
 import server.providers.HistoryProvider;
-import server.providers.UserProvider;;
+import server.models.User;
+import server.providers.UserProvider;
 
 @Path("/history")
 public class HistoryEndpoint {
@@ -29,10 +28,7 @@ public class HistoryEndpoint {
             return Response.status(400).entity(new Gson().toJson("error")).build();
         }
 
+
     }
-
-
-
-
 }
 
