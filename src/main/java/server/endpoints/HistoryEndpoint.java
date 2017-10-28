@@ -5,6 +5,7 @@ import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import server.utility.Globals;
 
 import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;

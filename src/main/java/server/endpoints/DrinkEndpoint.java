@@ -6,6 +6,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import server.models.User;
+import server.utility.Globals;
 
 import com.google.gson.Gson;
 import server.ServerImplDB.ImplDB;

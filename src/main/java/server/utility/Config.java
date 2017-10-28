@@ -15,10 +15,8 @@ public class Config {
     private static String DATABASE_USER;
     private static String DATABASE_PASSWORD;
 
-    private static String JWT_SECRET;
 
-
-    public Config () throws IOException {
+    public void initConfig () throws IOException {
         JsonObject jsonConfig = new JsonObject();
 
         InputStream input = this.getClass().getClassLoader().getResourceAsStream("/config.json");
@@ -30,6 +28,7 @@ public class Config {
         while((str = reader.readLine()) != null){
             stringBuffer.append(str);
         }
+
         JsonParser parser = new JsonParser();
 
         jsonConfig = (JsonObject) parser.parse(stringBuffer.toString());
@@ -40,7 +39,6 @@ public class Config {
         DATABASE_USER = jsonConfig.get("DATABASE_USER").getAsString();
         DATABASE_PASSWORD = jsonConfig.get("DATABASE_PASSWORD").getAsString();
 
-        JWT_SECRET = jsonConfig.get("JWT_SECRET").getAsString();
 
         reader.close();
         input.close();
@@ -85,38 +83,5 @@ public class Config {
     public static void setDatabasePassword(String databasePassword) {
         DATABASE_PASSWORD = databasePassword;
     }
-
-    public static String getJwtSecret() {
-        return JWT_SECRET;
-    }
-
-    public static void setJwtSecret(String jwtSecret) {
-        JWT_SECRET = jwtSecret;
-    }
-
-    /*private static String serverUrl;
-
-    public static JsonObject initConfig() {
-
-        JsonObject json = new JsonObject();
-
-        try {
-            JsonParser parserJ = new JsonParser();
-            json = (JsonObject) parserJ.parse(new FileReader("src/Sdk/config.json"));
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return json;
-    }
-
-    public static String getServerUrl() {
-        return serverUrl;
-    }
-
-    public static void setServerUrl(String serverUrl) {
-        Config.serverUrl = serverUrl;
-    }*/
 
 }

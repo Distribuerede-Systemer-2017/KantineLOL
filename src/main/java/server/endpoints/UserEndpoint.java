@@ -9,13 +9,13 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import server.providers.UserProvider;
 import server.utility.Token;
+import server.utility.Globals;
 
 @Path("/users")
 public class UserEndpoint {
 
     private UserController userController = new UserController();
     private UserProvider userProvider = new UserProvider();
-
 
     @POST
     @Path("/create")
@@ -25,22 +25,22 @@ public class UserEndpoint {
         try {
             User userCreated = new Gson().fromJson(jsonUser, User.class);
             boolean result = userController.addUser(userCreated);
-            //boolean result = userController.addUser(userCreated);
             status = 200;
+
+            Globals.log.writeLog(getClass().getName(), this, "Creating user" + userCreated.getUsername() + " success", 0);
         } catch (Exception e)
         {
             if (e.getClass() == BadRequestException.class) {
                 status = 400;
+
+                Globals.log.writeLog(getClass().getName(), this, "Creating user failed", 2);
             } else if (e.getClass() == InternalServerErrorException.class){
                 status = 500;
+                Globals.log.writeLog(getClass().getName(), this, "Error 500", 1);
             }
 
         }
-        return Response
-                .status(status)
-                .type("application/json")
-                .entity("{\"userCreated\":\"true\"}")
-                .build();
+        return Response.status(status).type("application/json").entity("{\"userCreated\":\"true\"}").build();
 
     }
 
@@ -52,7 +52,10 @@ public class UserEndpoint {
         User userFound = userProvider.authorizeUser(user.getUsername(), user.getPassword());
 
         if (userFound != null){
+
             String authToken = token.getToken(user.getUsername(), userFound.getId());
+
+            Globals.log.writeLog(getClass().getName(), this, "User authorized", 2);
 
             return Response.status(200).entity(new Gson().toJson(authToken)).build();
         } else {
@@ -69,6 +72,7 @@ public class UserEndpoint {
         User userFound = userProvider.getUserFromToken(data);
 
         if (userProvider.deleteToken(userFound.getId())) {
+
             return Response.status(200).entity("Logged out").build();
 
         } else {
