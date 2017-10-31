@@ -18,6 +18,7 @@ import server.providers.UserProvider;
 @Path("/drink")
 public class DrinkEndpoint {
     UserProvider userProvider = new UserProvider();
+    private Kryptering kryptering = new Kryptering();
 
     @GET
     public Response getAllProducts(@HeaderParam("token") String token) throws Exception {
@@ -29,11 +30,14 @@ public class DrinkEndpoint {
 
             String json = new Gson().toJson(allProducts);
 
-            String krypteret = Kryptering.encryptdecrypt(json);
-            krypteret = new Gson().toJson(krypteret);
+            /*String krypteret = Kryptering.encryptdecrypt(json);
+            krypteret = new Gson().toJson(krypteret);*/
 
-            return Response.status(200).type("application/json").entity(krypteret).build();
+
+
+            return Response.status(200).type("application/json").entity(Kryptering.encryptdecrypt(json)).build();
         } else {
+
             return Response.status(400).build();
         }
     }

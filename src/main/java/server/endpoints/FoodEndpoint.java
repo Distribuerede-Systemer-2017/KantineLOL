@@ -37,7 +37,7 @@ public class FoodEndpoint {
         } else {
             return Response.status(400).build();
         }
-
+        /*return Response.status(200).type("application/json").entity(Kryptering.encryptdecrypt(json)).build();*/
     }
 }
 

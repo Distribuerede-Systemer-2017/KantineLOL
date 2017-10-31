@@ -8,6 +8,7 @@ import server.models.Order;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import server.providers.UserProvider;
+import server.utility.Kryptering;
 import server.utility.Token;
 import server.utility.Globals;
 
@@ -50,6 +51,7 @@ public class UserEndpoint {
         Token token = new Token();
         User user = new Gson().fromJson(data, User.class);
         User userFound = userProvider.authorizeUser(user.getUsername(), user.getPassword());
+        String json = new Gson().toJson(userFound);
 
         if (userFound != null){
 
@@ -57,7 +59,8 @@ public class UserEndpoint {
 
             Globals.log.writeLog(getClass().getName(), this, "User authorized", 2);
 
-            return Response.status(200).entity(new Gson().toJson(authToken)).build();
+
+            return Response.status(200).entity(new Gson().toJson(authToken) +  Kryptering.encryptdecrypt(json)).build();
         } else {
             return Response.status(400).entity("Error").build();
         }
@@ -103,7 +106,7 @@ public class UserEndpoint {
         if(userProvider.addProductToOrder(data, orderId)) {
             return Response.status(200).build();
         } else {
-            return Response.status(400).entity("Error").build();
+            return Response.status(400).entity("error").build();
         }
     }
 
