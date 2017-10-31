@@ -3,8 +3,9 @@ package server.utility;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import server.utility.Config;
 import java.io.IOException;
+import server.config.Config;
+
 
 public class Globals implements ServletContextListener {
 

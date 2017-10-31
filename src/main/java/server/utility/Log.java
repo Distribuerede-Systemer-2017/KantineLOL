@@ -15,10 +15,12 @@ public class Log {
      * @param eventDescription description of what happens at the event in question (e.g. "Server printed: ---"
      * @param logLevel the level of logging needed, from everything to the most severe (used for the switch)
      */
-    public static void writeLog(String className, Object eventObject, String eventDescription, Integer logLevel) {
+
+    public void writeLog(String className, Object eventObject, String eventDescription, Integer logLevel) {
+
         //Initializes the log variable with the class in question
 
-        Logger log = LoggerFactory.getLogger(className);
+        log = LoggerFactory.getLogger(className);
 
 
         //Switch responsible for choosing the correct logging according to severity

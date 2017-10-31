@@ -1,4 +1,4 @@
-package server.utility;
+package server.config;
 
 import com.auth0.jwt.JWT;
 import com.google.gson.JsonObject;

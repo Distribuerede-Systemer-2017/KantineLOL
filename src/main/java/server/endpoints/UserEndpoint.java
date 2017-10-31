@@ -8,6 +8,7 @@ import server.models.Order;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import server.providers.UserProvider;
+import server.utility.Log;
 import server.utility.Token;
 import server.utility.Globals;
 
@@ -16,6 +17,7 @@ public class UserEndpoint {
 
     private UserController userController = new UserController();
     private UserProvider userProvider = new UserProvider();
+    private Log log = new Log();
 
     @POST
     @Path("/create")
@@ -32,8 +34,8 @@ public class UserEndpoint {
         {
             if (e.getClass() == BadRequestException.class) {
                 status = 400;
-
                 Globals.log.writeLog(getClass().getName(), this, "Creating user failed", 2);
+
             } else if (e.getClass() == InternalServerErrorException.class){
                 status = 500;
                 Globals.log.writeLog(getClass().getName(), this, "Error 500", 1);
