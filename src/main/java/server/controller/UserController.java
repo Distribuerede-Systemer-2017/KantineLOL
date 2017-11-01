@@ -1,9 +1,9 @@
 package server.controller;
 
+import com.sun.org.apache.xml.internal.security.algorithms.JCEMapper;
 import server.models.User;
 import server.utility.Digester;
 import server.providers.UserProvider;
-import java.util.ArrayList;
 
 
 
@@ -19,4 +19,6 @@ public class UserController {
         boolean result = userProvider.createUser(user);
         return result;
     }
+
+
 }

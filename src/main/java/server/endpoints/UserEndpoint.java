@@ -53,6 +53,8 @@ public class UserEndpoint {
         User userFound = userProvider.authorizeUser(user.getUsername(), user.getPassword());
         String json = new Gson().toJson(userFound);
 
+
+
         if (userFound != null){
 
             String authToken = token.getToken(user.getUsername(), userFound.getId());
@@ -89,10 +91,11 @@ public class UserEndpoint {
     public Response createOrder(@HeaderParam("token") String token, String data) throws Exception {
         User u = userProvider.getUserFromToken(token);
         Order order = new Gson().fromJson(data, Order.class);
+        String json = new Gson().toJson(order);
 
 
         if (u!=null && token!=null && userProvider.createOrder(order)) {
-            return Response.status(200).type("application/json").entity(new Gson().toJson(order)).build();
+            return Response.status(200).type("application/json").entity(new Gson().toJson(order) + Kryptering.encryptdecrypt(json) ).build();
         } else {
             return Response.status(400).entity("Error").build();
         }
@@ -103,8 +106,10 @@ public class UserEndpoint {
     @Path("/order/{orderId}")
     @POST
     public Response addProductToOrder(@PathParam("orderId") int orderId, String data) throws Exception {
+        String json = new Gson().toJson(orderId);
+
         if(userProvider.addProductToOrder(data, orderId)) {
-            return Response.status(200).build();
+            return Response.status(200).entity(Kryptering.encryptdecrypt(json)).build();
         } else {
             return Response.status(400).entity("error").build();
         }
