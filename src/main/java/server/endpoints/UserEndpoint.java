@@ -96,7 +96,6 @@ public class UserEndpoint {
             return Response.status(400).entity("Error").build();
         }
 
-
     }
 
     @Path("/order/{orderId}")
