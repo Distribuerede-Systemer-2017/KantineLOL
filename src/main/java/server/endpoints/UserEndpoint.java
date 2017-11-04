@@ -29,7 +29,8 @@ public class UserEndpoint {
             boolean result = userController.addUser(userCreated);
             status = 200;
 
-            Globals.log.writeLog(getClass().getName(), this, "Creating user" + userCreated.getUsername() + " success", 0);
+            Globals.log.writeLog(getClass()
+                    .getName(), this, "Creating user" + userCreated.getUsername() + " success", 0);
         } catch (Exception e)
         {
             if (e.getClass() == BadRequestException.class) {
